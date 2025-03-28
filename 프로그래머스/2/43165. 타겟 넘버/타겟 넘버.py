@@ -1,16 +1,18 @@
 def solution(numbers, target):
-    # 1. i가 len(numbers)면 비교후 종료
-    # 2. v +와 - 비교
-    cnt = 0
+    leaves = [0]
+    count = 0
     
-    def dfs(i, v):
-        if i == len(numbers):
-            if v == target:
-                nonlocal cnt
-                cnt += 1
-            return
-        else:
-            dfs(i + 1, v + numbers[i])
-            dfs(i + 1, v - numbers[i])
-    dfs(0,0)
-    return cnt
+    for num in numbers:
+        temp = []
+        
+        for leaf in leaves:
+            temp.append(leaf + num)
+            temp.append(leaf - num)
+        
+        leaves = temp
+    
+    for leaf in leaves:
+        if leaf == target:
+            count += 1
+    
+    return count

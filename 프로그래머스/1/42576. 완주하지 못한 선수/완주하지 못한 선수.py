@@ -1,16 +1,13 @@
 def solution(participant, completion):
-    dic = {}
+    # hashSum, hashSet 생성
+    hash_sum = 0
+    hash_dict = {}
     
-    for i in participant:
-        if i not in dic:
-            dic[i] = 1
-        else:
-            dic[i] += 1
+    for p in participant:
+        hash_dict[hash(p)] = p
+        hash_sum += hash(p)
     
-    for j in completion:
-        if dic[j] == 1:
-            dic.pop(j)
-        elif dic[j] >= 2:
-            dic[j] -= 1
-    res = list(dic.keys())
-    return res[0]
+    for c in completion:
+        hash_sum -= hash(c)
+    
+    return hash_dict[hash_sum]

@@ -1,16 +1,17 @@
 def solution(clothes):
-    dict = {}
-    res = 1
     
-    for item, typ in clothes:
-        if typ not in dict:
-            dict[typ] = 1
+    closet = {}
+    
+    for name, kind in clothes:
+        if kind in closet.keys():
+            closet[kind] += [name]
         else:
-            dict[typ] += 1
+            closet[kind] = [name]
     
-    arr = list(dict.values())
+    ans = 1
     
-    for i in arr:
-        res *= (i + 1)
+    for _, val in closet.items():
+        ans *= (len(val) + 1)
     
-    return res - 1
+    return ans - 1
+    

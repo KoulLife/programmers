@@ -1,12 +1,6 @@
-arr = list()
-res = list()
-
+A = []
 for _ in range(10):
-  num = int(input())
-  arr.append(num % 42)
-
-for i in range(10):
-  if arr[i] not in res:
-    res.append(arr[i])
-
-print(len(res))
+    T = int(input())
+    if T % 42 not in A:
+        A.append(T % 42)
+print(len(A))

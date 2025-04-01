@@ -1,8 +1,8 @@
-n = int(input())
-num = input()
-res = 0
+N = int(input())
+M = input()
 
-for i in range(n):
-  res += int(num[i])
+res = 0
+for i in range(N):
+    res += int(M[i])
 
 print(res)

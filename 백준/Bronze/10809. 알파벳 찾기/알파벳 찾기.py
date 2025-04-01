@@ -1,11 +1,13 @@
-s = input()
+S = input()
+D = {}
 
-arr = [-1]*26
+for i in range(len(S)):
+    if S[i] not in D.keys():
+        D[S[i]] = i
 
-for i in range(len(s)):
-  idx = ord(s[i]) - ord('a')
-  if arr[idx] == -1:
-    arr[idx] = i
-
-for i in range(len(arr)):
-  print(arr[i], end = " ")
+for i in range(26):
+    tmp = chr(ord('a') + i)
+    if tmp in D:
+        print(D[tmp],end=" ")
+    else:
+        print(-1,end=" ")

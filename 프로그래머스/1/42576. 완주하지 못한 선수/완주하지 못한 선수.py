@@ -1,13 +1,23 @@
 def solution(participant, completion):
-    # hashSum, hashSet 생성
-    hash_sum = 0
-    hash_dict = {}
-    
-    for p in participant:
-        hash_dict[hash(p)] = p
-        hash_sum += hash(p)
+    P = {}
+    C = {}
+    res = ""
     
     for c in completion:
-        hash_sum -= hash(c)
+        if c not in C.keys():
+            C[c] = 1
+        else:
+            C[c] += 1
     
-    return hash_dict[hash_sum]
+    for p in participant:
+        if p not in P.keys():
+            P[p] = 1
+        else:
+            P[p] += 1
+    
+    for s in P.keys():
+        if s not in C.keys() or P[s] != C[s]:
+            res = s
+            break
+    return res
+    

@@ -1,20 +1,14 @@
 def solution(s):
+    s_dict = {')' : '('}
     stack = []
     
-    for i in s:
-        if i == '(':
-            stack.append('(')
+    for i in range(len(s)):
+        if s[i] == '(':
+            stack.append(s[i])
         else:
-            if stack == [] or stack[-1] != '(':
+            if len(stack) == 0 or stack.pop() != s_dict[s[i]]:
                 return False
-            else:
-                stack.pop()
-                
-    if stack != []:
+    if len(stack) != 0:
         return False
-    
-    return True
-    
-    
-    
-    
+    else:
+        return True

@@ -1,11 +1,8 @@
 def solution(nums):
-    dic = set()
-
-    for _ in nums:
-        dic.add(_)
-
-    if len(nums) / 2 <= len(dic):
-        return len(nums) / 2
-    else:
-        return len(dic)
+    p_hash = {}
     
+    for i in nums:
+        if i not in p_hash.keys():
+            p_hash[i] = 1
+    
+    return min(len(nums) // 2, len(p_hash))

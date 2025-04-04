@@ -1,17 +1,15 @@
 def solution(clothes):
-    
-    closet = {}
-    
-    for name, kind in clothes:
-        if kind in closet.keys():
-            closet[kind] += [name]
+    hash_map = {}
+
+    for cloth in clothes:
+        if cloth[1] in hash_map:
+            hash_map[cloth[1]] += 1
         else:
-            closet[kind] = [name]
-    
-    ans = 1
-    
-    for _, val in closet.items():
-        ans *= (len(val) + 1)
-    
-    return ans - 1
-    
+            hash_map[cloth[1]] = 1
+
+    res = 1
+
+    for i in hash_map:
+        res *= (hash_map[i] + 1)
+
+    return res - 1

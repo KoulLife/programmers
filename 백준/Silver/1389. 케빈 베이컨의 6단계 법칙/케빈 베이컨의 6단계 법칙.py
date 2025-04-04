@@ -1,32 +1,31 @@
 from collections import deque
 
 N, M = map(int, input().split())
-adj = [[] for _ in range(N)]
+min_val = 1e9
 res = -1
-max_num = 1e9
+adj = [[] for _ in range(N)]
 
 for _ in range(M):
-    a, b = map(int, input().split())
-    adj[a - 1].append(b - 1)
-    adj[b - 1].append(a - 1)
+        a, b = map(int, input().split())
+        adj[a - 1].append(b - 1)
+        adj[b - 1].append(a - 1)
 
 for i in range(N):
-    dist = [-1] * N
-    visit = [False] * N
-    dist[i] = 0
-    visit[i] = True
-    queue = deque([i])
+        visited = [False] * N
+        Q = deque([i])
+        visited[i] = True
+        A = [0] * N
 
-    while len(queue) != 0:
-        u = queue.popleft()
+        while len(Q) > 0:
+                a = Q.popleft()
+                for b in adj[a]:
+                        if not visited[b]:
+                                A[b] = A[a] + 1
+                                Q.append(b)
+                                visited[b] = True
 
-        for v in adj[u]:
-            if not visit[v]:
-                queue.append(v)
-                visit[v] = True
-                dist[v] = dist[u] + 1
-    if max_num > sum(dist):
-        max_num = sum(dist)
-        res = i
+        if sum(A) < min_val:
+                min_val = sum(A)
+                res = i + 1
 
-print(res + 1)
+print(res)

@@ -1,30 +1,33 @@
 import sys
 from collections import deque
-
 input = sys.stdin.readline
-N,M = map(int, input().split())
-visit = [False] * N
+
+N, M = map(int, input().split())
 adj = [[] for _ in range(N)]
-count = 0
+visited = [False] * N
 
 for _ in range(M):
-    a, b = map(int, input().split())
-    adj[a - 1].append(b - 1)
-    adj[b - 1].append(a - 1)
+        a, b = map(int,input().split())
+        adj[a - 1].append(b - 1)
+        adj[b - 1].append(a - 1)
+
+res = 0
 
 for i in range(N):
-    if visit[i]:
-        continue
+        if visited[i]:
+                continue
 
-    count += 1
-    queue = deque([i])
-    visit[i] = True
+        res += 1
 
-    while len(queue) != 0:
-        u = queue.popleft()
-        for v in adj[u]:
-            if not visit[v]:
-                visit[v] = True
-                queue.append(v)
+        Q = deque([i])
+        visited[i] = True
 
-print(count)
+        while len(Q) > 0:
+                u = Q.popleft()
+
+                for v in adj[u]:
+                        if not visited[v]:
+                                visited[v] = True
+                                Q.append(v)
+
+print(res)

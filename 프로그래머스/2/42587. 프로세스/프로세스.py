@@ -1,19 +1,24 @@
 from collections import deque
 
 def solution(priorities, location):
-    q = deque(priorities)
-    answer = 0
-    while q:
-        m = max(q)
-        l = q.popleft()
-        location -= 1 
-        if l != m:
-            q.append(l)
-            if location < 0:
-                location = len(q) -1
-        else:
-            answer += 1
-            if location < 0:
-                break
-            
-    return answer
+        S = []  # 값 초기화
+        max_arr = []  # 최댓값 확인 배열
+
+        for i, v in enumerate(priorities):
+                S.append([i, v])  # [[0,2], [1,1], [2,3], [3,2]]
+                max_arr.append(v)
+        max_arr.sort(reverse=True)  # [3,2,2,1]
+        Q = deque(S)
+        idx = 0
+
+        while len(Q) > 0:
+                [i, v] = Q.popleft()
+                if v == max_arr[0]:
+                        idx += 1
+                        max_arr.pop(0)
+                        if i == location:
+                                break
+                else:
+                        Q.append([i, v])
+
+        return idx

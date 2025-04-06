@@ -1,39 +1,28 @@
-# 7
-# 6
-# 1 2
-# 2 3
-# 1 5
-# 5 2
-# 5 6
-# 4 7
-N = int(input())
-M = int(input())
+import sys
+input = sys.stdin.readline
 
-adj = [[] for _ in range(N)]
-for i in range(M):
+com = int(input())
+N = int(input())
+adj = [[] for _ in range(com)]
+visit = [False] * com
+
+# adj에 값 넣기
+for _ in range(N):
     a, b = map(int, input().split())
     adj[a - 1].append(b - 1)
     adj[b - 1].append(a - 1)
 
-check = [0] * N
-check[0] = 1
+def DFS(n):
+    visit[n] = True
+    for v in adj[n]:
+        if not visit[v]:
+            DFS(v)
 
-while True:
-    new = False
-    for i in range(N):
-        if check[i] == 0:
-            continue
+DFS(0)
 
-        for j in adj[i]:
-            if check[j] == 0:
-                check[j] = 1
-                new = True
+res = 0
+for i in range(len(visit)):
+    if visit[i] == True:
+        res += 1
 
-    if not new:
-        break
-
-count = 0
-for i in range(1, N):
-    if check[i] == 1:
-        count += 1
-print(count)
+print(res - 1)

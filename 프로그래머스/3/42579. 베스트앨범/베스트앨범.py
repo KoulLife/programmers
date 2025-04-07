@@ -1,20 +1,23 @@
 def solution(genres, plays):
-    dict1 = {}
-    dict2 = {}
-    res = []
+    D1 = {}
+    D2 = {}
+    ans = []
     
-    for i,(g,p) in enumerate(zip(genres, plays)):
-        if g not in dict1:
-            dict1[g] = [(i, p)]
+    for i, (g, p) in enumerate(zip(genres, plays)):
+        if g not in D1:
+            D1[g] = p
         else:
-            dict1[g].append((i, p))
-        if g not in dict2:
-            dict2[g] = p
+            D1[g] += p
+        if g not in D2:
+            D2[g] = [(i, p)]
         else:
-            dict2[g] += p
+            D2[g].append((i, p))
     
-    for (k, v) in sorted(dict2.items(), key=lambda x:x[1], reverse = True):
-        for (i, p) in sorted(dict1[k], key=lambda x:x[1], reverse=True)[:2]:
-            res.append(i)
-    return res
+    # sort & [:2]
+    # genre : D1
+    for (D1_g, D1_p) in sorted(D1.items(), key = lambda x:x[1], reverse = True):
+        for (D2_i, D2_p) in sorted(D2[D1_g], key = lambda x:x[1], reverse = True)[:2]:
+            ans.append(D2_i)
+    
+    return ans
     

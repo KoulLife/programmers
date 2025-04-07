@@ -1,38 +1,39 @@
-p, w = map(int, input().split())
+P, W = map(int, input().split())
 N = list(input())
 
 # 배열 생성
 words = [
-    ['A', 'B', 'C'],
-    ['D', 'E', 'F'],
-    ['G', 'H', 'I'],
-    ['J', 'K', 'L'],
-    ['M', 'N', 'O'],
-    ['P', 'Q', 'R', 'S'],
-    ['T', 'U', 'V'],
-    ['W', 'X', 'Y', 'Z']
-]
+    ['A','B','C'],
+    ['D','E','F'],
+    ['G','H','I'],
+    ['J','K','L'],
+    ['M','N','O'],
+    ['P','Q','R','S'],
+    ['T','U','V'],
+    ['W','X','Y','Z']]
 
-# 이전에 누른 키의 인덱스를 저장할 변수 (리스트 사용)
-prev_key = None
+# 반복, 전과 비교
+before = None
 res = 0
-
-for char in N:
-    if char == " ":
-        # 공백은 한 번 누르는 경우
-        res += p
-        prev_key = None  # 공백 후에는 대기 시간 없음
+for num in N:
+    # 공백인지 확인, 공백이라면 before 빼고, +2
+    if num == " ":
+        before = None
+        res += P
     else:
-        # 해당 문자가 몇 번째 키에 있는지와 몇 번 눌러야 하는지 확인
-        for i, key_group in enumerate(words):
-            if char in key_group:
-                # 만약 이전 문자와 같은 키라면 대기 시간 추가
-                if prev_key is not None and prev_key == i:
-                    res += w
-                # 해당 키에서 몇 번 눌러야 하는지 (인덱스+1)
-                presses = key_group.index(char) + 1
-                res += presses * p
-                prev_key = i
-                break
+        for i, w in enumerate(words):
+            if num in w:
+                # 몇번째에 있는지 확인하기
+                for tmp in w:
+                    res += P
+                    if tmp == num:
+                        break
 
+                # before와 비교하여 i가 같다면 10을 더하고, 비어있다면 그냥 추가하기
+                if before == None:
+                    before = i
+                else:
+                    if before == i:
+                        res += W
+                    before = i
 print(res)

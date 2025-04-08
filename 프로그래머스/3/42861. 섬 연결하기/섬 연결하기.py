@@ -1,20 +1,18 @@
 def solution(n, costs):
+    # w기준으로 오름차순 하기
+    costs.sort(key = lambda x:x[2])
+    # 배열 추가하기
+    link = set([costs[0][0]])
+    # 정답 초기화
     res = 0
-    # w으로 정렬
-    costs.sort(key=lambda x: x[2])
-
-    # set 만들기
-    link = set()
-    link.add(costs[0][0])
-
-    # while
+    # 하나씩 빼기
     while len(link) != n:
-        # costs에서 [0], [1] 값 빼기
         for u1, u2, w in costs:
             if u1 in link and u2 in link:
                 continue
             if u1 in link or u2 in link:
-                link.update((u1, u2))
                 res += w
+                link.update([u2,u1])
                 break
     return res
+    

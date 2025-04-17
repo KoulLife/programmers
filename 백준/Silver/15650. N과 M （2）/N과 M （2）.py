@@ -1,5 +1,14 @@
-from itertools import combinations
+n, m = map(int, input().split())
+arr = []
 
-N,M = map(int, input().split())
-for combination in combinations(range(1, N + 1), M):
-  print(*combination)
+def f1(start):
+  if len(arr) == m:
+    print(*arr)
+    return
+
+  for i in range(start, n + 1):
+    arr.append(i)
+    f1(i + 1)
+    arr.pop()
+
+f1(1)

@@ -1,4 +1,4 @@
-B = input().split('.')  # . 기준으로 나눔
+B = input().split('.')
 ans = []
 
 for part in B:

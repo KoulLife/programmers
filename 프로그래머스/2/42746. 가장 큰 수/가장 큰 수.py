@@ -1,7 +1,7 @@
 def solution(numbers):
-    ans = ""
-    numbers = list(map(str, numbers))
-    numbers.sort(key = lambda x: x*3, reverse = True)
-    for i in numbers:
-        ans += i
-    return str(int(ans))
+    res = ""
+
+    mappedListNums = list(map(str, numbers))
+    mappedListNums.sort(key = lambda x: x*3, reverse=True)
+    res = ''.join(mappedListNums)
+    return str(int(res))

@@ -1,12 +1,14 @@
 def solution(brown, yellow):
-    answer = []
+    res = []
 
-    total = brown + yellow
-    for b in range(1, total + 1):
-        if (total % b) == 0:
-            a = total // b
-            if a >= b:
-                if 2 * a + 2 * b == brown + 4:
-                    answer = [a, b]
+    for y in range(1, yellow + 1):
+        if yellow % y != 0:
+            continue
 
-    return answer
+        x = yellow // y
+        tmp = (x + 2) * 2 + (y + 2) * 2
+        if (tmp) == brown + 4:
+            res = [x + 2, y + 2]
+            break
+
+    return res

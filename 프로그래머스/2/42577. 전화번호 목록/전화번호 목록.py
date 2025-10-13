@@ -1,14 +1,15 @@
 def solution(phone_book):
-    hash_map = {}
     
-    for phone in phone_book:
-        hash_map[phone] = 1
+    hashMap = {}
     
-    for phone in phone_book:
-        tmp = ""
-        for num in phone:
-            tmp += num
-            if tmp != phone and tmp in hash_map:
+    for nums in phone_book:
+        hashMap[nums] = 1
+    
+    for nums in phone_book:
+        arr = ""
+        for num in nums:
+            arr += num
+            if arr in hashMap and arr != nums:
                 return False
+        
     return True
-            

@@ -1,15 +1,16 @@
 def solution(clothes):
-    hash_map = {}
-
-    for cloth in clothes:
-        if cloth[1] in hash_map:
-            hash_map[cloth[1]] += 1
+    hashMap = {}
+    
+    for [a, b] in clothes:
+        if b in hashMap:
+            hashMap[b] += 1
         else:
-            hash_map[cloth[1]] = 1
-
+            hashMap[b] = 1
+    
     res = 1
-
-    for i in hash_map:
-        res *= (hash_map[i] + 1)
-
+    
+    for _, v in hashMap.items():
+        res *= (v + 1)
+    
     return res - 1
+        

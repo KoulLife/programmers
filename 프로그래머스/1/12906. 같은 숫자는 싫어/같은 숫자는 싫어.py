@@ -1,11 +1,8 @@
 def solution(arr):
-    res = []
+    s = []
     
-    for i in range(0, len(arr)):
-        if i > 0 and arr[i - 1] == arr[i]:
-            continue
-        else:
-            res.append(arr[i])
+    for i in arr:
+        if s == [] or s[-1] != i:
+            s.append(i)
     
-    
-    return res
+    return s

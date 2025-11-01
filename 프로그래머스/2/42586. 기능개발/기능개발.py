@@ -1,8 +1,20 @@
-def solution(progresses, speeds):
-    Q=[]
+def solution(progresses, speeds):    
+    
+    arr = []
+    arr2 = []
+    # [7, 3, 9]
     for p, s in zip(progresses, speeds):
-        if len(Q)==0 or Q[-1][0]<-((p-100)//s):
-            Q.append([-((p-100)//s),1])
+        tmp = (100 - p) // s
+        if ((100 - p) % s ) != 0:
+            tmp += 1
+        arr.append(tmp)        
+        
+    maxNum = 0
+    for i in arr:
+        if i > maxNum:
+            maxNum = i
+            arr2.append(1)
         else:
-            Q[-1][1]+=1
-    return [q[1] for q in Q]
+            arr2[-1] = arr2[-1] + 1
+    
+    return arr2

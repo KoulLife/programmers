@@ -1,23 +1,28 @@
-import sys
-input = sys.stdin.readline
+# 10 5
+# 1 2 3 4 2 5 3 1 1 2
+
+from sys import stdin
+input = stdin.readline
 
 N, M = map(int, input().split())
-A = list(map(int, input().split()))
-P = [0]
+nums = list(map(int, input().split()))
+
+sum_val = nums[0]
+l, r = 0, 0
 res = 0
 
-for i in range(N):
-  P.append(A[i] + P[i])
-  
-left, right = 0, 1
+while r < N:
+    if sum_val == M:
+        res += 1
 
-while right < len(P):
-  if (P[right] - P[left]) == M:
-    res += 1
-    left += 1
-    right += 1
-  elif (P[right] - P[left]) < M:
-    right += 1
-  else:
-    left += 1
+    if (l <= r) and (sum_val > M):
+        sum_val -= nums[l]
+        l += 1
+    else:
+        if (r + 1) == N:
+            break
+        r += 1
+        sum_val += nums[r]
+
 print(res)
+

@@ -1,20 +1,21 @@
-def solution(progresses, speeds):    
-    
-    arr = []
-    arr2 = []
-    # [7, 3, 9]
-    for p, s in zip(progresses, speeds):
-        tmp = (100 - p) // s
-        if ((100 - p) % s ) != 0:
-            tmp += 1
-        arr.append(tmp)        
-        
-    maxNum = 0
-    for i in arr:
-        if i > maxNum:
-            maxNum = i
-            arr2.append(1)
+def solution(progresses, speeds):
+    # 소요기간 계산하기
+    work_arr = [0] * len(speeds)
+
+    for i in range(len(speeds)):
+        quotient = (100 - progresses[i]) // speeds[i]
+        if (100 - progresses[i]) % speeds[i] != 0:
+            quotient += 1
+        work_arr[i] = quotient
+
+    answer = [0]
+    max_num = 0
+
+    for work in work_arr:
+        if max_num >= work:
+            answer[-1] += 1            
         else:
-            arr2[-1] = arr2[-1] + 1
-    
-    return arr2
+            answer.append(1)
+            max_num = work
+    answer.pop(0)
+    return answer

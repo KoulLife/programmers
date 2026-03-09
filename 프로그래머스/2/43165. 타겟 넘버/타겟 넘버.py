@@ -1,18 +1,14 @@
-def solution(numbers, target):
-    leaves = [0]
+def dfs(numbers, target, idx, value):
+    if idx == len(numbers):
+        return 1 if target == value else 0
+    
     count = 0
-    
-    for num in numbers:
-        temp = []
-        
-        for leaf in leaves:
-            temp.append(leaf + num)
-            temp.append(leaf - num)
-        
-        leaves = temp
-    
-    for leaf in leaves:
-        if leaf == target:
-            count += 1
+    count += dfs(numbers, target, idx+1, value+numbers[idx])
+    count += dfs(numbers, target, idx+1, value-numbers[idx])
     
     return count
+
+def solution(numbers, target):
+    res = dfs(numbers, target, 0, 0)
+    
+    return res

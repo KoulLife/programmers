@@ -2,24 +2,23 @@ import heapq
 
 def solution(scoville, K):
     heapq.heapify(scoville)
-    
-    res = 0
-    
-    while True:
-        if scoville[0] < K and len(scoville) == 1:
-            res = -1
+    res = -1
+    mix = 0
+    while True:                
+        spicy_01 = heapq.heappop(scoville)
+        if spicy_01 >= K:
+            res = mix
             break
         
-        if scoville[0] >= K:            
+        if len(scoville) == 0:
             break
+            
+        spicy_02 = heapq.heappop(scoville)
         
-        a = heapq.heappop(scoville)
-        b = heapq.heappop(scoville)
-        mix = a + (b * 2)
+        new_spicy = spicy_01 + (spicy_02 * 2)
+        heapq.heappush(scoville ,new_spicy)        
+        mix += 1
         
-        heapq.heappush(scoville, mix)
-        
-        res += 1
-    
     return res
+        
         

@@ -2,15 +2,15 @@ def solution(k, dungeons):
     res = 0
     visited = [False] * len(dungeons)
     
-    def dfs(current_k, count):
+    def dfs(k, cnt):
         nonlocal res
-        res = max(count, res)
+        res = max(res, cnt)
         
         for i in range(len(dungeons)):
-            if dungeons[i][0] <= current_k and not visited[i]:
+            # 방문을 하지 않앗고, 최소 필요 피로도 보다 더 크다면
+            if not visited[i] and dungeons[i][0] <= k:                
                 visited[i] = True
-                dfs(current_k - dungeons[i][1] , count + 1)
+                dfs(k - dungeons[i][1],cnt+1)
                 visited[i] = False
-    
-    dfs(k, 0)
+    dfs(k,0)
     return res
